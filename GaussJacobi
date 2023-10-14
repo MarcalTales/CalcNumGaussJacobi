@@ -1,27 +1,28 @@
-#include<stdio.h>
-#include<conio.h>
-#include<math.h>
+#include <stdio.h>
+#include <math.h>
+#include <locale.h>
 
 float calcmaior(float x1,float y1,float z1);
-float f1(float x,float y,float z, int a, int b, int c, int d);
-float f2(float x,float y,float z, int a, int b, int c, int d);
-float f3(float x,float y,float z, int a, int b, int c, int d);
-
+float f1(float x,float y,float z, float a, float b, float c, float d);
+float f2(float x,float y,float z, float a, float b, float c, float d);
+float f3(float x,float y,float z, float a, float b, float c, float d);
+void printmat(float matriz[3][3], float vet[3]);
 int main()
 {
-    float x0,y0,z0,x1,y1,z1, e, maior,ec,ec2;
-    int cont=1, matC[3][3],vetG[3];
+    float x0,y0,z0,x1,y1,z1, e, maior,ec,ec2, matC[3][3],vetG[3];
+    int cont=1;
+    setlocale(LC_ALL,"");
     for(int i=0;i<3;i++){
             for(int j=0;j<3;j++){
                 printf("\nDigite a%dx%d: ",i+1,j+1);
-                scanf("%d",&matC[i][j]);
+                scanf("%f",&matC[i][j]);
             }
     }
     for(int i=0;i<3;i++){
         printf("\nDigite b%d: ",i+1);
-        scanf("%d",&vetG[i]);
+        scanf("%f",&vetG[i]);
     }
-    printf("Insira o erro:\n");
+    printf("Insira a precisão:\n");
     scanf("%f", &e);
     printf("Insira o x0:\n");
     scanf("%f", &x0);
@@ -29,14 +30,14 @@ int main()
     scanf("%f", &y0);
     printf("Insira o z0:\n");
     scanf("%f", &z0);
-    printf("\n\tx\ty\tz\n");
-    cont=1;
+    printmat(matC,vetG);
+    printf("\n\n\tx\ty\tz\n");
     do
         {
         x1 = f1(x0,y0,z0,matC[0][0],matC[0][1],matC[0][2],vetG[0]);
         y1 = f2(x0,y0,z0,matC[1][0],matC[1][1],matC[1][2],vetG[1]);
         z1 = f3(x0,y0,z0,matC[2][0],matC[2][1],matC[2][2],vetG[2]);
-        printf("%d\t%0.4f\t%0.4f\t%0.4f\n",cont, x1,y1,z1);
+        printf("\n%d\t%0.4f\t%0.4f\t%0.4f\n",cont, x1,y1,z1);
         ec=calcmaior(fabs(z1-x0),fabs(y1-y0),fabs(x1-z0));
         maior=calcmaior(x1,y1,z1);
         ec2=ec/maior;
@@ -60,12 +61,18 @@ float calcmaior(float x1,float y1,float z1){
         return fabs(z1);
     }
 }
-float f1(float x,float y,float z, int a, int b, int c, int d){
+float f1(float x,float y,float z, float a, float b, float c, float d){
     return((d-(b*y)-(c*z))/a);
 }
-float f2(float x,float y,float z, int a, int b, int c, int d){
+float f2(float x,float y,float z, float a, float b, float c, float d){
     return((d-(a*x)-(c*z))/b);
 }
-float f3(float x,float y,float z, int a, int b, int c, int d){
+float f3(float x,float y,float z, float a, float b, float c, float d){
     return((d-(a*x)-(b*y))/c);
+}
+void printmat(float matriz[3][3], float vet[3]){
+    printf("Para o seguinte sistema: \n\n");
+    for(int i=0;i<3;i++){
+        printf("\n(%.1f)x\t+(%.1f)y\t+(%.1f)z\t=%.1f",matriz[i][0],matriz[i][1],matriz[i][2],vet[i]);
+    }
 }
