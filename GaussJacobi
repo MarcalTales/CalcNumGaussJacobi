@@ -45,7 +45,7 @@ int main()
         x0 = x1;
         y0 = y1;
         z0 = z1;
-    }while(ec2>e);
+    }while(ec2>e&&cont<10);
 
     printf("\nSolução: x=%0.4f, y=%0.4f and z = %0.4f\n",x1,y1,z1);
 
