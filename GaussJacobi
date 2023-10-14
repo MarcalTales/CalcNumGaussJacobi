@@ -1,0 +1,71 @@
+#include<stdio.h>
+#include<conio.h>
+#include<math.h>
+
+float calcmaior(float x1,float y1,float z1);
+float f1(float x,float y,float z, int a, int b, int c, int d);
+float f2(float x,float y,float z, int a, int b, int c, int d);
+float f3(float x,float y,float z, int a, int b, int c, int d);
+
+int main()
+{
+    float x0,y0,z0,x1,y1,z1, e, maior,ec,ec2;
+    int cont=1, matC[3][3],vetG[3];
+    for(int i=0;i<3;i++){
+            for(int j=0;j<3;j++){
+                printf("\nDigite a%dx%d: ",i+1,j+1);
+                scanf("%d",&matC[i][j]);
+            }
+    }
+    for(int i=0;i<3;i++){
+        printf("\nDigite b%d: ",i+1);
+        scanf("%d",&vetG[i]);
+    }
+    printf("Insira o erro:\n");
+    scanf("%f", &e);
+    printf("Insira o x0:\n");
+    scanf("%f", &x0);
+    printf("Insira o y0:\n");
+    scanf("%f", &y0);
+    printf("Insira o z0:\n");
+    scanf("%f", &z0);
+    printf("\n\tx\ty\tz\n");
+    cont=1;
+    do
+        {
+        x1 = f1(x0,y0,z0,matC[0][0],matC[0][1],matC[0][2],vetG[0]);
+        y1 = f2(x0,y0,z0,matC[1][0],matC[1][1],matC[1][2],vetG[1]);
+        z1 = f3(x0,y0,z0,matC[2][0],matC[2][1],matC[2][2],vetG[2]);
+        printf("%d\t%0.4f\t%0.4f\t%0.4f\n",cont, x1,y1,z1);
+        ec=calcmaior(fabs(z1-x0),fabs(y1-y0),fabs(x1-z0));
+        maior=calcmaior(x1,y1,z1);
+        ec2=ec/maior;
+        cont++;
+        x0 = x1;
+        y0 = y1;
+        z0 = z1;
+    }while(ec2>e);
+
+    printf("\nSolução: x=%0.4f, y=%0.4f and z = %0.4f\n",x1,y1,z1);
+
+    system("pause");
+    return 0;
+}
+float calcmaior(float x1,float y1,float z1){
+    if (fabs(x1)>fabs(y1) && fabs(x1)>fabs(z1)){
+        return fabs(x1);
+    }else if(fabs(y1)>fabs(x1) && fabs(y1)>fabs(z1)){
+        return fabs(y1);
+    }else{
+        return fabs(z1);
+    }
+}
+float f1(float x,float y,float z, int a, int b, int c, int d){
+    return((d-(b*y)-(c*z))/a);
+}
+float f2(float x,float y,float z, int a, int b, int c, int d){
+    return((d-(a*x)-(c*z))/b);
+}
+float f3(float x,float y,float z, int a, int b, int c, int d){
+    return((d-(a*x)-(b*y))/c);
+}
