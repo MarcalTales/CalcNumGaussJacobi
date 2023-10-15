@@ -45,7 +45,7 @@ int main()
         x0 = x1;
         y0 = y1;
         z0 = z1;
-    }while(ec2>e&&cont<10);
+    }while(ec2>e&&cont<50);
 
     printf("\nSolução: x=%0.4f, y=%0.4f and z = %0.4f\n",x1,y1,z1);
 
@@ -73,6 +73,6 @@ float f3(float x,float y,float z, float a, float b, float c, float d){
 void printmat(float matriz[3][3], float vet[3]){
     printf("Para o seguinte sistema: \n\n");
     for(int i=0;i<3;i++){
-        printf("\n(%.1f)x\t+(%.1f)y\t+(%.1f)z\t=%.1f",matriz[i][0],matriz[i][1],matriz[i][2],vet[i]);
+        printf("\n(%.1f)x+(%.1f)y+(%.1f)z=%.1f",matriz[i][0],matriz[i][1],matriz[i][2],vet[i]);
     }
 }
